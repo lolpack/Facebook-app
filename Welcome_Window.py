@@ -1,20 +1,26 @@
 from Tkinter import *
-from Upload_window import *
-from Download_window import *
 import ttk
 import tkMessageBox
 import os
 import tkFont
 from PIL import Image, ImageTk
+import facebook
 
 class mainwindow():
     """This is the welcome window where the user can choose to upload, download or sign out"""
-    def __init__(self, tkinstance):
+    def __init__(self, tkinstance, token, module):
         self.root = tkinstance
-        self.name = 'Steve' # This is a dummy name. Will be grabbed from Facebook
+        self.token = token
+        self.switch = module
+        self.name = self.get_Name() 
+        self.draw_Window()
 
+    def get_Name(self):
+        graph = facebook.GraphAPI(self.token)
+        profile = graph.get_object('me')
+        return profile["name"]
 
-        
+    def draw_Window(self):
         
         self.appwindow = ttk.Frame(self.root, padding = "5 5 5 5", width = 400, height = 500)
         self.root.title("Facebook Pictures")
@@ -46,15 +52,17 @@ class mainwindow():
 
     def upload(self):
         """Post's pictures to facebook"""
-        self.appwindow.destroy()
-        uploadwindow(self.root, self.name)
+        self.appwindow.grid_forget()
+        next_ = self.switch()
+        next_.run_upload(self.root, self.name, self.token, self.switch)
         
         
 
     def download(self):
         """Downloads pictures from facebook"""
-        self.appwindow.destroy()
-        download_window(self.root, self.name)
+        self.appwindow.grid_forget()
+        next_ = self.switch()
+        next_.run_download(self.root, self.name, self.token, self.switch)
 
     def quit_(self):
         quit()
