@@ -8,20 +8,21 @@ import facebook
 
 class mainwindow():
     """This is the welcome window where the user can choose to upload, download or sign out"""
-    def __init__(self, tkinstance, token, module):
+    def __init__(self, tkinstance, token, switch_module):
         self.root = tkinstance
         self.token = token
-        self.switch = module
+        self.switch = switch_module
         self.name = self.get_Name() 
         self.draw_Window()
 
     def get_Name(self):
+        """Get's user's name for optimum friendlyness"""
         graph = facebook.GraphAPI(self.token)
         profile = graph.get_object('me')
         return profile["name"]
 
     def draw_Window(self):
-        
+        """Draws the window"""
         self.appwindow = ttk.Frame(self.root, padding = "5 5 5 5", width = 400, height = 500)
         self.root.title("Facebook Pictures")
         self.appwindow.grid(column = 0, row = 0, sticky=(N,W,E,S))
@@ -51,8 +52,8 @@ class mainwindow():
         
 
     def upload(self):
-        """Post's pictures to facebook"""
-        self.appwindow.grid_forget()
+        """Runs the upload window"""
+        self.appwindow.grid_forget() #Notice the use of grid_forget() rather than destroy()
         next_ = self.switch()
         next_.run_upload(self.root, self.name, self.token, self.switch)
         
@@ -60,7 +61,7 @@ class mainwindow():
 
     def download(self):
         """Downloads pictures from facebook"""
-        self.appwindow.grid_forget()
+        self.appwindow.grid_forget() #We might need this window again!
         next_ = self.switch()
         next_.run_download(self.root, self.name, self.token, self.switch)
 

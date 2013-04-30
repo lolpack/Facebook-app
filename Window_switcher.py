@@ -5,8 +5,7 @@ from Download_window import download_window
 from Tkinter import *
 
 class Switch:
-    def __init__(self, *args):
-        pass
+    """Class used to switch between windows in app"""
         
     def run_download(self, *args):
         Down = download_window(*args)
