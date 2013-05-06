@@ -16,7 +16,7 @@ class mainwindow():
         self.draw_Window()
 
     def get_Name(self):
-        """Get's user's name for optimum friendlyness"""
+        """Get's user's name for optimum friendliness"""
         graph = facebook.GraphAPI(self.token)
         profile = graph.get_object('me')
         return profile["name"]
