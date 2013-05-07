@@ -56,7 +56,7 @@ class uploadwindow():
         self.Upload = ttk.Button(self.window1, text = 'Upload', command = self.upload)
         self.Upload.grid(column = 1, row = 5)
         
-        self.return_ = ttk.Button(self.window1, text = 'Return to main menu', command = self.mainmenu)
+        self.return_ = ttk.Button(self.window1, text = 'Return to main menu', command = self.mainmenu1)
         self.return_.grid(column = 2, row = 5)
         
         self.quit_ = ttk.Button(self.window1, text = 'Quit', command = self.quit_)
@@ -82,7 +82,12 @@ class uploadwindow():
         self.window.grid_forget()
         next_ = self.switch()
         next_.run_welcome(self.root, self.token, self.switch)
-        print type(self.emessage)
+
+    def mainmenu1(self):
+        self.window1.grid_forget()
+        next_ = self.switch()
+        next_.run_welcome(self.root, self.token, self.switch)
+
         
     def quit_(self):
         quit()

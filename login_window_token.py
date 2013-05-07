@@ -64,6 +64,7 @@ class loginwindow():
         
     def run(self):
         self.root.call('wm', 'attributes', '.', '-topmost', '1') #forces tk frame to be top window
+        self.root.call('wm', 'attributes', '.', '-topmost', '0')
         self.root.mainloop() #runs mainloop for the app
 
     def quit_(self):
